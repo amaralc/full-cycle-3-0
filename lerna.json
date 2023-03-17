@@ -1,6 +1,16 @@
 {
   "$schema": "node_modules/lerna/schemas/lerna-schema.json",
-  "useWorkspaces": true,
   "version": "independent",
-  "packages": ["."]
+  "packages": ["."],
+  "command": {
+    "changelogPreset": {
+      "name": "conventionalcommits"
+    },
+    "version": {
+      "conventionalCommits": true,
+      "message": "chore(release): [skip ci]",
+      "commitUrlFormat": "{{host}}/{{owner}}/{{repository}}/commits/{{hash}}",
+      "compareUrlFormat": "{{host}}/{{owner}}/{{repository}}/branches/compare/{{currentTag}}..{{previousTag}}"
+    }
+  }
 }
