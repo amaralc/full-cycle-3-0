@@ -6,13 +6,17 @@
   "author": "amaralc <amaral.calil@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "prepare": "husky install",
+    "pre-commit": "echo 'no tests to run...'",
     "release:no-push": "lerna version --yes --conventional-commits --changelog-preset conventionalcommits --no-push",
     "release": "lerna version --yes --conventional-commits --changelog-preset conventionalcommits"
   },
   "dependencies": {
-    "standard-version": "^9.5.0"
+    "husky": "^8.0.3"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.4.4",
+    "@commitlint/config-conventional": "^17.4.4",
     "lerna": "^6.5.1"
   }
 }
