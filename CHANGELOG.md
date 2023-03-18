@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.0](https://github.com/amaralc/full-cycle-3-0/compare/full-cycle@3.1.0...full-cycle@3.2.0) (2023-03-18)
+
+
+### Features
+
+* working with volumes ([61b31de](https://github.com/amaralc/full-cycle-3-0/commit/61b31debbd968d864c60eaa133384b59d143396a))
+
+
+
 ## [3.1.0](https://github.com/amaralc/full-cycle-3-0/compare/full-cycle@3.0.2...full-cycle@3.1.0) (2023-03-18)
 
 
