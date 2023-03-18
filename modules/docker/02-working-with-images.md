@@ -95,3 +95,77 @@ WORKDIR /app
 ```
 
 - Notice that during the image build, previous steps were reused from cache;
+
+## Entrypoint vs Command
+
+https://plataforma.fullcycle.com.br/courses/242/168/110/conteudos?capitulo=110&conteudo=6708
+
+The **CMD** specifies an executable and its parameters that should execute once the container starts but that can be overwritten once the container is run;
+
+The **ENTRYPOINT** specifies a command and parameters that are always executed once the container starts;
+
+---
+
+</br>
+
+### CMD
+
+- (terminal) Create a new dockerfile: `touch _ubuntu_cmd.Dockerfile`
+- (\_ubuntu_cmd.Dockerfile) Add content to the file:
+
+```Dockerfile
+# From base image
+FROM ubuntu:latest
+
+# Specify which executable should be called once the container starts (first parameter) and what arguments to pass to that executable (following parameters) ["executable", ..."parameters"]
+CMD [ "echo", "Hello World" ]
+```
+
+- (terminal) Build the image from that file:
+
+```bash
+docker build . -t username/nginx-with-vim:latest -f "$(pwd)"/modules/docker/_ubuntu_cmd.Dockerfile
+```
+
+- (terminal) Run a container from that image: `docker run --rm username/nginx-with-vim-cmd:latest`
+
+- (terminal) Verify that the container was run and that "Hello World" was logged to the terminal;
+- (terminal) Now run another container but substitute the executable and parameters:
+
+```bash
+docker run --rm username/nginx-with-vim-cmd:latest echo "Hello Full Cycle!"
+```
+
+### ENTRYPOINT
+
+- (terminal) Create a new dockerfile: `touch _ubuntu_entrypoint.Dockerfile`
+- (\_ubuntu_entrypoint.Dockerfile) Add content to the file:
+
+```Dockerfile
+# From base image
+FROM ubuntu:latest
+
+# Specify which executable should be called once the container starts (first parameter) and what arguments to pass to that executable (following parameters) ["executable", ..."parameters"]
+## This command will always be executed when you run a new container
+ENTRYPOINT [ "echo", "Hello" ]
+
+# Specify a parameter that can be overwritten
+CMD [ "World" ]
+```
+
+- (terminal) Build the image from that file:
+
+```bash
+docker build . -t username/nginx-with-vim-entrypoint:latest -f "$(pwd)"/modules/docker/_ubuntu_entrypoint.Dockerfile
+```
+
+- (terminal) Run a container from that image: `docker run --rm username/nginx-with-vim-entrypoint:latest`
+
+- (terminal) Verify that the container was run and that "Hello World" was logged to the terminal;
+- (terminal) Now run another container but add parameter to overwrite the "World" string:
+
+```bash
+docker run --rm username/nginx-with-vim-entrypoint:latest "Full Cycle!"
+```
+
+- (terminal) Verify that the message logged to the terminal was "Hello Full Cycle!"
