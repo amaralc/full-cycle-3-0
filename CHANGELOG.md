@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.4.0](https://github.com/amaralc/full-cycle-3-0/compare/full-cycle@3.3.1...full-cycle@3.4.0) (2023-03-18)
+
+
+### Features
+
+* docker entrypoint exec ([dd804bd](https://github.com/amaralc/full-cycle-3-0/commit/dd804bd1a48f03efcbe861188c522fb67bf3a97b))
+* entrypoint vs command ([40f99cc](https://github.com/amaralc/full-cycle-3-0/commit/40f99cc7070b21a0ecd79310d2b3d56e480c0147))
+* going further with dockerfile ([5e3e7fa](https://github.com/amaralc/full-cycle-3-0/commit/5e3e7fa08b9c28f97d939f5ca86a3303c5e05aa0))
+* publishing images to docker hub ([c8a94f3](https://github.com/amaralc/full-cycle-3-0/commit/c8a94f35327e15fbd14756eb25383e3bd6b07a4b))
+* working with images - getting started ([ac33ffe](https://github.com/amaralc/full-cycle-3-0/commit/ac33ffebb85523c90c8b321388446330c355b35f))
+
+
+
 ## [3.3.1](https://github.com/amaralc/full-cycle-3-0/compare/full-cycle@3.3.0...full-cycle@3.3.1) (2023-03-18)
 
 **Note:** Version bump only for package full-cycle
