@@ -58,6 +58,13 @@
   - [Accessing and changing files in a container](./modules/docker/01-getting-started.md#accessing-and-changing-files-in-a-container)
   - [Getting started with bind mounts](./modules/docker/01-getting-started.md#getting-started-with-bind-mounts)
   - [Working with volumes](./modules/docker/01-getting-started.md#working-with-volumes)
+- [Working With Images](./modules/docker/02-working-with-images.md)
+  - [Understanding Images and DockerHub](./modules/docker/02-working-with-images.md#understanding-images-and-dockerhub)
+  - [Creating first image with Dockerfile](./modules/docker/02-working-with-images.md#creating-first-image-with-dockerfile)
+  - [Going Further with Dockerfile](./modules/docker/02-working-with-images.md#going-further-with-dockerfile)
+  - [Entrypoint vs Command](./modules/docker/02-working-with-images.md#entrypoint-vs-command)
+  - [Docker Entrypoint exec](./modules/docker/02-working-with-images.md#docker-entrypoint-exec)
+  - [Publishing image to DockerHub](./modules/docker/02-working-with-images.md#publishing-image-to-dockerhub)
 
 </br>
 
@@ -91,3 +98,53 @@
   - [Data Transfer Object (DTO)](./modules/clean-architecture/01-basic-concepts.md#data-transfer-object-dto)
   - [Presenters](./modules/clean-architecture/01-basic-concepts.md/#presenters)
   - [Entities vs DDD](./modules/clean-architecture/01-basic-concepts.md#entities-vs-ddd)
+
+# Working with Images
+
+[<- Index](../../README.md)
+
+</br>
+
+# Publishing image to DockerHub
+
+https://plataforma.fullcycle.com.br/courses/242/168/110/conteudos?capitulo=110&conteudo=6710
+
+- (terminal) Create a new dockerfile: `touch _nginx_fullcycle.Dockerfile`;
+- (\_nginx_fullcycle.Dockerfile) Add the following content to the file:
+
+```Dockerfile
+FROM nginx:latest
+
+COPY html /usr/share/nginx/html
+
+ENTRYPOINT [ "/docker-entrypoint.sh" ]
+
+CMD [ "nginx", "-g", "daemon off;" ]
+```
+
+- (terminal) Build the image and naming it using your DockerHub username:
+
+```bash
+docker build . -t amaralc/nginx-full-cycle:latest -f "$(pwd)"/modules/docker/_nginx_fullcycle.Dockerfile
+```
+
+- (terminal) Run a container with that image:
+
+```bash
+docker run --rm -d -p 8080:80 amaralc/nginx-full-cycle:latest
+```
+
+### Publish image to DockerHub
+
+If you still do not have an account in DockerHub, go ahead and create one at https://hub.docker.com/
+
+After creating your account, go back to your terminal and:
+
+- (terminal) Login to docker registry: `docker login`
+- (terminal) Fill in your username and press enter;
+- (terminal) Fill in your password and press enter;
+- (terminal) Push your image to docker hub: `docker push amaralc/nginx-full-cycle:latest`
+
+- (browser) Now visit your repository at `https://hub.docker.com/repository/docker/your-username/your-image-name` and verify that it was published. In our case: https://hub.docker.com/repository/docker/amaralc/nginx-full-cycle
+
+_IMPORTANT_: in free mode, docker will automatically delete your images after some time of inactivity (now downloads);
