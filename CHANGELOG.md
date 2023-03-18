@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.3.0](https://github.com/amaralc/full-cycle-3-0/compare/full-cycle@3.2.0...full-cycle@3.3.0) (2023-03-18)
+
+
+### Features
+
+* add index ([42d151d](https://github.com/amaralc/full-cycle-3-0/commit/42d151d41878e38852df2cd11edee1583238e91e))
+
+
+
 ## [3.2.0](https://github.com/amaralc/full-cycle-3-0/compare/full-cycle@3.1.0...full-cycle@3.2.0) (2023-03-18)
 
 

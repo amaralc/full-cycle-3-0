@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0](https://github.com/amaralc/full-cycle-3-0/compare/docker@1.1.0...docker@1.2.0) (2023-03-18)
+
+
+### Features
+
+* add index ([42d151d](https://github.com/amaralc/full-cycle-3-0/commit/42d151d41878e38852df2cd11edee1583238e91e))
+
+
+
 ## 1.1.0 (2023-03-18)
 
 
