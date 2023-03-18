@@ -204,7 +204,7 @@ exec "$@"
 
 That string specifies that after running the entire script, bash should execute anything that comes after its execution (in our case, the CMD or other command the user passes upon container initialization).
 
-# Publishing image to DockerHub
+## Publishing image to DockerHub
 
 https://plataforma.fullcycle.com.br/courses/242/168/110/conteudos?capitulo=110&conteudo=6710
 
@@ -233,7 +233,7 @@ docker build . -t amaralc/nginx-full-cycle:latest -f "$(pwd)"/modules/docker/_ng
 docker run --rm -d -p 8080:80 amaralc/nginx-full-cycle:latest
 ```
 
-### Publish image to DockerHub
+**PUBLISH IMAGE**
 
 If you still do not have an account in DockerHub, go ahead and create one at https://hub.docker.com/
 
