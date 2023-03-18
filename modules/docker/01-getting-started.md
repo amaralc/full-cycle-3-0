@@ -102,3 +102,19 @@ Exposing a port is not enough to access the container from the host machine, whi
 - (terminal) Exit the nginx process;
 - (terminal) Run nginx image in detached mode: `docker run -d -p 80:80 nginx`
 
+## Removing containers
+
+https://plataforma.fullcycle.com.br/courses/242/168/110/conteudos?capitulo=110&conteudo=6701
+
+- (terminal) List running containers: `docker ps`
+
+```
+CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS         PORTS                               NAMES
+daa3bd8bc96b   nginx     "/docker-entrypoint.…"   6 minutes ago   Up 6 minutes   0.0.0.0:80->80/tcp, :::80->80/tcp   stupefied_bohr
+```
+
+- (terminal) Stop running container by id: `docker stop daa3bd8bc96b`
+- (terminal) Remove container by id after stopping it: `docker rm daa3bd8bc96b`
+- (terminal) Force removal of a running container by id: `docker rm daa3bd8bc96b -f`
+- (terminal) Force removal of a running container by name: `docker rm mystifying_thompson -f`
+
