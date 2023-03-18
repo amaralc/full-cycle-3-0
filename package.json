@@ -18,8 +18,5 @@
     "@commitlint/cli": "^17.4.4",
     "@commitlint/config-conventional": "^17.4.4",
     "lerna": "^6.5.1"
-  },
-  "workspaces": [
-    "modules/*"
-  ]
+  }
 }
