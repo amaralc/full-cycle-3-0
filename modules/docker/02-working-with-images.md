@@ -233,7 +233,7 @@ docker build . -t amaralc/nginx-full-cycle:latest -f "$(pwd)"/modules/docker/_ng
 docker run --rm -d -p 8080:80 amaralc/nginx-full-cycle:latest
 ```
 
-### Publish image
+### Publish image to DockerHub
 
 If you still do not have an account in DockerHub, go ahead and create one at https://hub.docker.com/
 
