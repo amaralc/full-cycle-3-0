@@ -1,7 +1,8 @@
 {
   "$schema": "node_modules/lerna/schemas/lerna-schema.json",
   "version": "independent",
-  "packages": ["."],
+  "useWorkspaces": true,
+  "packages": [".", "modules/*"],
   "command": {
     "changelogPreset": {
       "name": "conventionalcommits"
