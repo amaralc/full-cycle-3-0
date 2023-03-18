@@ -1,14 +1,12 @@
 # Getting Started
 
-- [Hello World](#hello-world)
-- [Executing Ubuntu](#executing-ubuntu)
-- [Publishing ports with nginx](#publishing-ports-with-nginx)
-- [Removing containers](#removing-containers)
-- [Accessing and changing files in a container](#accessing-and-changing-files-in-a-container)
-- [Getting started with bind mounts](#getting-started-with-bind-mounts)
-- [Working with volumes](#working-with-volumes)
+[<- Index](../../README.md)
 
 </br>
+
+### Key notes
+
+-
 
 ## Hello World
 
