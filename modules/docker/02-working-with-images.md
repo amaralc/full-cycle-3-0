@@ -203,3 +203,47 @@ exec "$@"
 ```
 
 That string specifies that after running the entire script, bash should execute anything that comes after its execution (in our case, the CMD or other command the user passes upon container initialization).
+
+# Publishing image to DockerHub
+
+https://plataforma.fullcycle.com.br/courses/242/168/110/conteudos?capitulo=110&conteudo=6710
+
+- (terminal) Create a new dockerfile: `touch _nginx_fullcycle.Dockerfile`;
+- (\_nginx_fullcycle.Dockerfile) Add the following content to the file:
+
+```Dockerfile
+FROM nginx:latest
+
+COPY html /usr/share/nginx/html
+
+ENTRYPOINT [ "/docker-entrypoint.sh" ]
+
+CMD [ "nginx", "-g", "daemon off;" ]
+```
+
+- (terminal) Build the image and naming it using your DockerHub username:
+
+```bash
+docker build . -t amaralc/nginx-full-cycle:latest -f "$(pwd)"/modules/docker/_nginx_fullcycle.Dockerfile
+```
+
+- (terminal) Run a container with that image:
+
+```bash
+docker run --rm -d -p 8080:80 amaralc/nginx-full-cycle:latest
+```
+
+### Publish image
+
+If you still do not have an account in DockerHub, go ahead and create one at https://hub.docker.com/
+
+After creating your account, go back to your terminal and:
+
+- (terminal) Login to docker registry: `docker login`
+- (terminal) Fill in your username and press enter;
+- (terminal) Fill in your password and press enter;
+- (terminal) Push your image to docker hub: `docker push amaralc/nginx-full-cycle:latest`
+
+- (browser) Now visit your repository at `https://hub.docker.com/repository/docker/your-username/your-image-name` and verify that it was published. In our case: https://hub.docker.com/repository/docker/amaralc/nginx-full-cycle
+
+_IMPORTANT_: in free mode, docker will automatically delete your images after some time of inactivity (now downloads);

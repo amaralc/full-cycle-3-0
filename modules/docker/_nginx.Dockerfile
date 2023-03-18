@@ -8,9 +8,9 @@ RUN apt-get update
 RUN apt-get install -y vim
 
 # Copy files from host to container
-## First argument: path to file on host relative to the dockerfile
-## Second argument: path to file on container relative to root
-COPY html /usr/share/nginx/html
+## First argument: path to file or folder on host relative to the current directory
+## Second argument: path to file or folder in the container relative to root
+COPY /modules/docker/html /usr/share/nginx/html
 
 # Specify working directory (base directory when you access the container)
 WORKDIR /app
