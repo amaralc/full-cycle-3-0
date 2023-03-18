@@ -69,3 +69,29 @@ username/nginx-with-vim                     latest               46b8018b5700   
 - (terminal) Create a new container from that image: `docker run -it username/nginx-with-vim:latest bash`
 - (terminal) Inside the container verify if vim is installed: `vim --version`
 
+## Going Further with Dockerfile
+
+https://plataforma.fullcycle.com.br/courses/242/168/110/conteudos?capitulo=110&conteudo=6707
+
+- Enhance your dockerfile with a custom index.html file:
+
+```Dockerfile
+# From base image
+FROM nginx:latest
+
+# Update apt-get
+RUN apt-get update
+
+# Install vim and say yes to all questions
+RUN apt-get install -y vim
+
+# Copy files from host to container
+## First argument: path to file on host relative to the dockerfile
+## Second argument: path to file on container relative to root
+COPY html /usr/share/nginx/html
+
+# Specify working directory (base directory when you access the container)
+WORKDIR /app
+```
+
+- Notice that during the image build, previous steps were reused from cache;
