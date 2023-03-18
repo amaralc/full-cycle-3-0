@@ -169,3 +169,37 @@ docker run --rm username/nginx-with-vim-entrypoint:latest "Full Cycle!"
 ```
 
 - (terminal) Verify that the message logged to the terminal was "Hello Full Cycle!"
+
+## Docker Entrypoint exec
+
+https://plataforma.fullcycle.com.br/courses/242/168/110/conteudos?capitulo=110&conteudo=6709
+
+- Take a look at this [Nginx Dockerfile](https://github.com/nginxinc/docker-nginx/blob/5ce65c3efd395ee2d82d32670f233140e92dba99/mainline/debian/Dockerfile);
+- Notice that in the end of the file we have the following content:
+
+```Dockerfile
+...
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
+
+EXPOSE 80
+
+STOPSIGNAL SIGQUIT
+
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+- The ENTRYPOINT is specifying a bash script that should run upon container initialization;
+- The CMD is specifying an executable and its parameters, to be run if nothing else is passed upon container initialization;
+
+Now lets take a look at what's inside [/docker-entrypoint.sh](https://github.com/nginxinc/docker-nginx/blob/5ce65c3efd395ee2d82d32670f233140e92dba99/mainline/debian/docker-entrypoint.sh)
+
+- Notice that in the end of the file there is the following string:
+
+```bash
+...
+
+exec "$@"
+```
+
+That string specifies that after running the entire script, bash should execute anything that comes after its execution (in our case, the CMD or other command the user passes upon container initialization).
