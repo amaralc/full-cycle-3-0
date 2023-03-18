@@ -118,3 +118,24 @@ daa3bd8bc96b   nginx     "/docker-entrypoint.…"   6 minutes ago   Up 6 minutes
 - (terminal) Force removal of a running container by id: `docker rm daa3bd8bc96b -f`
 - (terminal) Force removal of a running container by name: `docker rm mystifying_thompson -f`
 
+## Accessing and changing files in a container
+
+https://plataforma.fullcycle.com.br/courses/242/168/110/conteudos?capitulo=110&conteudo=6702
+
+- (terminal) Run a named container: `docker run -d -p 8080:80 --name my-container nginx`
+- (terminal) Execute the "ls" bash command in a running container and get out from it: `docker exec my-container ls`
+- (terminal) Execute the "ls" bash command in a running container and stay connected in tty: `docker exec -it my-container bash`
+- (terminal) Update apt-get: `apt-get update`
+- (terminal) Install vim: `apt-get install vim`
+- (terminal) Navigate to folder within the container: `cd /usr/share/nginx/html/`
+- (terminal) Open index.html with vim: `vim index.html`;
+- (terminal) Enter edit mode by pressing "i";
+- (terminal) Navigate to "Welcome to Nginx!" and edit that sentence to "Welcome to Full Cycle!";
+- (terminal) Exit edit mode by pressing Ctrl + C;
+- (terminal) Save and exit by pressing ":wq" + Enter;
+- (terminal) If you choose to exit without saving: ":q!" + Enter;
+- (terminal) Exit the container: `exit`
+- (browser) Access localhost:8080;
+- (browser) Verify that your changes are live;
+- (terminal) Remove the container: `docker rm my-container -f`
+
