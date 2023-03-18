@@ -6,6 +6,7 @@
 - [Removing containers](#removing-containers)
 - [Accessing and changing files in a container](#accessing-and-changing-files-in-a-container)
 - [Getting started with bind mounts](#getting-started-with-bind-mounts)
+- [Working with volumes](#working-with-volumes)
 
 </br>
 
@@ -123,6 +124,12 @@ daa3bd8bc96b   nginx     "/docker-entrypoint.…"   6 minutes ago   Up 6 minutes
 - (terminal) Force removal of a running container by id: `docker rm daa3bd8bc96b -f`
 - (terminal) Force removal of a running container by name: `docker rm mystifying_thompson -f`
 
+If you want to stop all containers you can use the following command:
+
+- (terminal) Stop all containers: `docker stop $(docker ps -q)`;
+- (terminal) To remove all containers that are not running: `docker rm $(docker ps -a -q)`
+- (terminal) To remove all containers (running or not): `docker rm $(docker ps -a -q) -f`
+
 ## Accessing and changing files in a container
 
 https://plataforma.fullcycle.com.br/courses/242/168/110/conteudos?capitulo=110&conteudo=6702
@@ -181,3 +188,47 @@ A big difference between the "-v" and the "--mount" options is that:
 
 - "-v" it creates a source folder in your local machine if the specified path didn't exist before;
 - "--mount" do not create a source folder if it doesn't exist;
+
+## Working with volumes
+
+- https://plataforma.fullcycle.com.br/courses/242/168/110/conteudos?capitulo=110&conteudo=6704
+
+</br>
+
+- Bind mounts as seen previously, are not the same concept as volumes;
+- (terminal) Create a named volume: `docker volume create my-volume`;
+- (terminal) List your volumes: `docker volume ls`;
+- (terminal) Inspect your volume: `docker volume inspect my-volume`;
+- (terminal) Run a container connected with your volume:
+
+```
+docker run --name my-container -d --mount type=volume,source=my-volume,target=/app nginx
+```
+
+- (terminal) Execute your container in interactive mode and with teletypewriter: `docker exec -it my-container bash`
+- (terminal) Create a new file within that container: `touch app/index.html`;
+- (terminal) Exit your container: `exit`
+- (terminal) Create a new container and mount the same volume to it:
+
+```
+docker run --name my-second-container -d --mount type=volume,source=my-volume,target=/app nginx
+```
+
+- (terminal) Execute your second container with -it: `docker exec -it my-container bash`
+- (terminal) Navigate to /app: `cd /app`;
+- (terminal) List the content of that folder: `ls`
+- (terminal) Verify that that folder contains the index.html file you have created within the first container;
+
+Another way of creating a new container, binding it to a volume is by using "-v:
+
+- (terminal) Create a new container and mount the same volume to it:
+
+```
+docker run --name my-third-container -d -v my-volume:/app nginx
+```
+
+Now lets stop and remove all containers and volumes:
+
+- (terminal) Stop and remove all containers: `docker rm $(docker ps -a -q) -f`;
+- (terminal) Remove all volumes that have "my-volume" substring in their name: `docker volume rm $(docker volume ls -qf name=my-volume)`
+- (terminal) Force remove all volumes that exist but are not connected to any container: `docker volume rm $(docker volume ls -qf dangling=true)`;
