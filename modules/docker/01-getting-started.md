@@ -1,8 +1,13 @@
 # Getting Started
 
-### Key notes
+- [Hello World](#hello-world)
+- [Executing Ubuntu](#executing-ubuntu)
+- [Publishing ports with nginx](#publishing-ports-with-nginx)
+- [Removing containers](#removing-containers)
+- [Accessing and changing files in a container](#accessing-and-changing-files-in-a-container)
+- [Getting started with bind mounts](#getting-started-with-bind-mounts)
 
--
+</br>
 
 ## Hello World
 
@@ -67,3 +72,112 @@ CONTAINER ID   IMAGE                COMMAND    CREATED         STATUS           
 
 - The "COMMAND" column shows what command was executed once the container was instantiated;
 - The "NAMES" column show the automatically generated name for the container;
+
+## Executing Ubuntu
+
+https://plataforma.fullcycle.com.br/courses/242/168/110/conteudos?capitulo=110&conteudo=6699
+
+- (terminal) Run ubuntu container: `docker run -it ubuntu bash` or `docker run -i -t ubuntu bash`
+
+```
+  - The "-i" parameter means interactive mode, attaching your terminal to the container;
+  - The "-t" parameter means "tty" which stands for "teletypewriter" which lets you run remote commands from your terminal to that container;
+```
+
+- (terminal) In other terminal list the containers that are executing: `docker ps`
+- (terminal) Verify that a container with ubuntu image is running and that "bash" is the process that is keeping it alive;
+
+```
+A container is a process in the host machine. If the inner process that keeps it running dies, the container die.
+```
+
+- (terminal) Run a container and remove it after you exit: `docker run -it --rm ubuntu:latest bash`
+
+## Publishing ports with Nginx
+
+https://plataforma.fullcycle.com.br/courses/242/168/110/conteudos?capitulo=110&conteudo=6700
+
+- (terminal) Run nginx image: `docker run nginx`
+
+```
+Exposing a port is not enough to access the container from the host machine, which is in other network
+```
+
+- (terminal) Run nginx image and redirect port 80 from host machine to port 80 from that container: `docker run -p 80:80 nginx`
+- (terminal) Exit the nginx process;
+- (terminal) Run nginx image in detached mode: `docker run -d -p 80:80 nginx`
+
+## Removing containers
+
+https://plataforma.fullcycle.com.br/courses/242/168/110/conteudos?capitulo=110&conteudo=6701
+
+- (terminal) List running containers: `docker ps`
+
+```
+CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS         PORTS                               NAMES
+daa3bd8bc96b   nginx     "/docker-entrypoint.…"   6 minutes ago   Up 6 minutes   0.0.0.0:80->80/tcp, :::80->80/tcp   stupefied_bohr
+```
+
+- (terminal) Stop running container by id: `docker stop daa3bd8bc96b`
+- (terminal) Remove container by id after stopping it: `docker rm daa3bd8bc96b`
+- (terminal) Force removal of a running container by id: `docker rm daa3bd8bc96b -f`
+- (terminal) Force removal of a running container by name: `docker rm mystifying_thompson -f`
+
+## Accessing and changing files in a container
+
+https://plataforma.fullcycle.com.br/courses/242/168/110/conteudos?capitulo=110&conteudo=6702
+
+- (terminal) Run a named container: `docker run -d -p 8080:80 --name my-container nginx`
+- (terminal) Execute the "ls" bash command in a running container and get out from it: `docker exec my-container ls`
+- (terminal) Execute the "ls" bash command in a running container and stay connected in tty: `docker exec -it my-container bash`
+- (terminal) Update apt-get: `apt-get update`
+- (terminal) Install vim: `apt-get install vim`
+- (terminal) Navigate to folder within the container: `cd /usr/share/nginx/html/`
+- (terminal) Open index.html with vim: `vim index.html`;
+- (terminal) Enter edit mode by pressing "i";
+- (terminal) Navigate to "Welcome to Nginx!" and edit that sentence to "Welcome to Full Cycle!";
+- (terminal) Exit edit mode by pressing Ctrl + C;
+- (terminal) Save and exit by pressing ":wq" + Enter;
+- (terminal) If you choose to exit without saving: ":q!" + Enter;
+- (terminal) Exit the container: `exit`
+- (browser) Access localhost:8080;
+- (browser) Verify that your changes are live;
+- (terminal) Remove the container: `docker rm my-container -f`
+
+## Getting started with bind mounts
+
+https://plataforma.fullcycle.com.br/courses/242/168/110/conteudos?capitulo=110&conteudo=6703
+
+- (terminal) Create a local folder that you want to use as a volume for your container: `mkdir modules/docker/html`;
+- (terminal) Add an index.html file to it: `touch modules/docker/html.index.html`;
+- (VS Code) Add content to that html page: `<h1>Full Cycle<h1>`;
+- (terminal) Run a container mounting a volume from your host machine in a container: `docker run -d --name my-container -p 8080:80 -v $(pwd)/modules/docker/html:/usr/share/nginx/html nginx:latest`
+
+```
+The -v option specifies what path in my machine should be bound to what path in the container:
+
+"-v path/in/my/machine:path/in/the/container"
+```
+
+- (browser) Navigate to locahost:8080;
+- (browser) Verify that the content on you local volume is displayed in the nginx page;
+
+```
+Note:
+
+This is how you can work in your development environment using Docker. You can mount your src folder content as a volume of your container and then run it. By doing that, you can change your source code, and then access the changes through the container.
+
+```
+
+Now a days, instead of using -v, the most popular command is the "mount command. It lets it explicit the type, source and target paths:
+
+- (terminal) Run a container, binding a volume using the "mount" attribute:
+
+```
+docker run -d --name my-container -p 8080:80 --mount type=bind,source="$(pwd)"/modules/docker/html,target=/usr/share/nginx/html nginx:latest
+```
+
+A big difference between the "-v" and the "--mount" options is that:
+
+- "-v" it creates a source folder in your local machine if the specified path didn't exist before;
+- "--mount" do not create a source folder if it doesn't exist;
