@@ -67,3 +67,24 @@ CONTAINER ID   IMAGE                COMMAND    CREATED         STATUS           
 
 - The "COMMAND" column shows what command was executed once the container was instantiated;
 - The "NAMES" column show the automatically generated name for the container;
+
+## Executing Ubuntu
+
+https://plataforma.fullcycle.com.br/courses/242/168/110/conteudos?capitulo=110&conteudo=6699
+
+- (terminal) Run ubuntu container: `docker run -it ubuntu bash` or `docker run -i -t ubuntu bash`
+
+```
+  - The "-i" parameter means interactive mode, attaching your terminal to the container;
+  - The "-t" parameter means "tty" which stands for "teletypewriter" which lets you run remote commands from your terminal to that container;
+```
+
+- (terminal) In other terminal list the containers that are executing: `docker ps`
+- (terminal) Verify that a container with ubuntu image is running and that "bash" is the process that is keeping it alive;
+
+```
+A container is a process in the host machine. If the inner process that keeps it running dies, the container die.
+```
+
+- (terminal) Run a container and remove it after you exit: `docker run -it --rm ubuntu:latest bash`
+
