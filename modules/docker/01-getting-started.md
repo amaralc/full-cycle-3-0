@@ -1,8 +1,13 @@
 # Getting Started
 
-### Key notes
+- [Hello World](#hello-world)
+- [Executing Ubuntu](#executing-ubuntu)
+- [Publishing ports with nginx](#publishing-ports-with-nginx)
+- [Removing containers](#removing-containers)
+- [Accessing and changing files in a container](#accessing-and-changing-files-in-a-container)
+- [Getting started with bind mounts](#getting-started-with-bind-mounts)
 
--
+</br>
 
 ## Hello World
 
@@ -139,3 +144,40 @@ https://plataforma.fullcycle.com.br/courses/242/168/110/conteudos?capitulo=110&c
 - (browser) Verify that your changes are live;
 - (terminal) Remove the container: `docker rm my-container -f`
 
+## Getting started with bind mounts
+
+https://plataforma.fullcycle.com.br/courses/242/168/110/conteudos?capitulo=110&conteudo=6703
+
+- (terminal) Create a local folder that you want to use as a volume for your container: `mkdir modules/docker/html`;
+- (terminal) Add an index.html file to it: `touch modules/docker/html.index.html`;
+- (VS Code) Add content to that html page: `<h1>Full Cycle<h1>`;
+- (terminal) Run a container mounting a volume from your host machine in a container: `docker run -d --name my-container -p 8080:80 -v $(pwd)/modules/docker/html:/usr/share/nginx/html nginx:latest`
+
+```
+The -v option specifies what path in my machine should be bound to what path in the container:
+
+"-v path/in/my/machine:path/in/the/container"
+```
+
+- (browser) Navigate to locahost:8080;
+- (browser) Verify that the content on you local volume is displayed in the nginx page;
+
+```
+Note:
+
+This is how you can work in your development environment using Docker. You can mount your src folder content as a volume of your container and then run it. By doing that, you can change your source code, and then access the changes through the container.
+
+```
+
+Now a days, instead of using -v, the most popular command is the "mount command. It lets it explicit the type, source and target paths:
+
+- (terminal) Run a container, binding a volume using the "mount" attribute:
+
+```
+docker run -d --name my-container -p 8080:80 --mount type=bind,source="$(pwd)"/modules/docker/html,target=/usr/share/nginx/html nginx:latest
+```
+
+A big difference between the "-v" and the "--mount" options is that:
+
+- "-v" it creates a source folder in your local machine if the specified path didn't exist before;
+- "--mount" do not create a source folder if it doesn't exist;
