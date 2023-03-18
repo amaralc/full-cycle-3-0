@@ -88,3 +88,17 @@ A container is a process in the host machine. If the inner process that keeps it
 
 - (terminal) Run a container and remove it after you exit: `docker run -it --rm ubuntu:latest bash`
 
+## Publishing ports with Nginx
+
+https://plataforma.fullcycle.com.br/courses/242/168/110/conteudos?capitulo=110&conteudo=6700
+
+- (terminal) Run nginx image: `docker run nginx`
+
+```
+Exposing a port is not enough to access the container from the host machine, which is in other network
+```
+
+- (terminal) Run nginx image and redirect port 80 from host machine to port 80 from that container: `docker run -p 80:80 nginx`
+- (terminal) Exit the nginx process;
+- (terminal) Run nginx image in detached mode: `docker run -d -p 80:80 nginx`
+
