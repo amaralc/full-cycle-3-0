@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.5.1](https://github.com/amaralc/full-cycle-3-0/compare/full-cycle@3.5.0...full-cycle@3.5.1) (2023-05-01)
+
+**Note:** Version bump only for package full-cycle
+
+
+
+
+
+## [3.5.0](https://github.com/amaralc/full-cycle-3-0/compare/full-cycle@3.4.0...full-cycle@3.5.0) (2023-05-01)
+
+
+### Features
+
+* keycloak notes ([caa350b](https://github.com/amaralc/full-cycle-3-0/commit/caa350b3f2ea31bff0b6020c99d561eb8b11b83a))
+
+
+
 ## [3.4.0](https://github.com/amaralc/full-cycle-3-0/compare/full-cycle@3.3.1...full-cycle@3.4.0) (2023-03-18)
 
 
