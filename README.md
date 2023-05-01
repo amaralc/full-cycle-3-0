@@ -36,7 +36,7 @@
   - [API Gateway] (0%)
   - [RabbitMQ] (0%)
   - [Apache Kafka] (0%)
-  - [Authentication and KeyCloak] (0%)
+  - [Authentication and KeyCloak](#authentication-and-keycloak) (0%)
   - [Practical Project Architecture - Codeflix] (0%)
   - [Practical Project - TypeScript (Back-end)] (0%)
   - [Practical Project - React (Front-end)] (0%)
@@ -99,52 +99,13 @@
   - [Presenters](./modules/clean-architecture/01-basic-concepts.md/#presenters)
   - [Entities vs DDD](./modules/clean-architecture/01-basic-concepts.md#entities-vs-ddd)
 
-# Working with Images
+### Authentication and Key
 
-[<- Index](../../README.md)
-
-</br>
-
-# Publishing image to DockerHub
-
-https://plataforma.fullcycle.com.br/courses/242/168/110/conteudos?capitulo=110&conteudo=6710
-
-- (terminal) Create a new dockerfile: `touch _nginx_fullcycle.Dockerfile`;
-- (\_nginx_fullcycle.Dockerfile) Add the following content to the file:
-
-```Dockerfile
-FROM nginx:latest
-
-COPY html /usr/share/nginx/html
-
-ENTRYPOINT [ "/docker-entrypoint.sh" ]
-
-CMD [ "nginx", "-g", "daemon off;" ]
-```
-
-- (terminal) Build the image and naming it using your DockerHub username:
-
-```bash
-docker build . -t amaralc/nginx-full-cycle:latest -f "$(pwd)"/modules/docker/_nginx_fullcycle.Dockerfile
-```
-
-- (terminal) Run a container with that image:
-
-```bash
-docker run --rm -d -p 8080:80 amaralc/nginx-full-cycle:latest
-```
-
-### Publish image to DockerHub
-
-If you still do not have an account in DockerHub, go ahead and create one at https://hub.docker.com/
-
-After creating your account, go back to your terminal and:
-
-- (terminal) Login to docker registry: `docker login`
-- (terminal) Fill in your username and press enter;
-- (terminal) Fill in your password and press enter;
-- (terminal) Push your image to docker hub: `docker push amaralc/nginx-full-cycle:latest`
-
-- (browser) Now visit your repository at `https://hub.docker.com/repository/docker/your-username/your-image-name` and verify that it was published. In our case: https://hub.docker.com/repository/docker/amaralc/nginx-full-cycle
-
-_IMPORTANT_: in free mode, docker will automatically delete your images after some time of inactivity (now downloads);
+- [Introduction to OAuth 2 and OpenID Connect](./modules/authentication-and-keycloak/notes.md)
+  - [Overview](./modules/authentication-and-keycloak/notes.md#overview)
+  - [Basic concepts about OAuth](./modules/authentication-and-keycloak/notes.md#basic-concepts-about-oauth)
+  - [OpenID Connect](./modules/authentication-and-keycloak/notes.md#openid-connect)
+- [Getting started with KeyCloak](./modules/authentication-and-keycloak/notes.md#getting-started-docker-tutorial)
+-
+-
+- [References](./modules/authentication-and-keycloak/notes.md#references)
