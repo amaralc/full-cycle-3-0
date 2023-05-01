@@ -63,11 +63,31 @@ func main() {
 			return
 		}
 
+		// Extract the ID token from the access token's extra data
+		idToken, ok := token.Extra("id_token").(string)
+		if !ok {
+			// If the ID token cannot be extracted, respond with an error and a 500 Internal Server Error status
+			http.Error(writer, "Failed to generate IDToken", http.StatusInternalServerError)
+			return
+		}
+
+		// Retrieve the user's information using the provider and the access token
+		userInfo, err := provider.UserInfo(ctx, oauth2.StaticTokenSource(token))
+		if err != nil {
+			// If there is an error while retrieving user information, respond with an error and a 500 Internal Server Error status
+			http.Error(writer, "Failed to get UserInfo", http.StatusInternalServerError)
+			return
+		}
+
 		// Create a struct containing the access token
 		resp := struct {
 			AccessToken *oauth2.Token
+			IDToken     string
+			UserInfo    *oidc.UserInfo
 		}{
 			AccessToken: token,
+			IDToken:     idToken,
+			UserInfo:    userInfo,
 		}
 
 		// Marshal the struct into JSON format
