@@ -1,4 +1,4 @@
-# Introduction to OAuth and OpenID Connect
+# Authentication and KeyCloak
 
 ## Introduction to OAuth 2 and OpenID Connect
 
@@ -115,6 +115,76 @@ https://plataforma.fullcycle.com.br/courses/242/168/108/conteudos?capitulo=108&c
 
 ### Creating our first client
 
+https://plataforma.fullcycle.com.br/courses/242/168/108/conteudos?capitulo=108&conteudo=6433
+
+- (KeyCloak) Update the "myclient" created in the last class;
+
+  - (KeyCloak) Set "Client Authentication" to "On" (http://localhost:8080/admin/master/console/#/myrealm/clients/1938d40f-103c-4555-980b-ccea1d1ef420/settings);
+  - (KeyCloak) Access "Credentials" tab (http://localhost:8080/admin/master/console/#/myrealm/clients/1938d40f-103c-4555-980b-ccea1d1ef420/credentials)
+  - (KeyCloak) Copy the client secret;
+
+- (Go) Create a client service in go;
+  - (Go) Implementation is described [here](./keycloak-go/goclient/main.go)
+
+### Generating our first access token
+
+https://plataforma.fullcycle.com.br/courses/242/168/108/conteudos?capitulo=108&conteudo=6434
+
+- (KeyCloak) Log out "myuser" from the recently created sessions (http://localhost:8080/admin/master/console/#/myrealm/users/c57f8b76-79a7-4ef4-aded-b8afd5259b3f/sessions);
+- (GoClient) Handle callbacks and token exchange. Implementation described [here](./keycloak-go/goclient/main.go);
+- (terminal) Navigate to "goclient" folder: `cd modules/authentication-and-keycloak/keycloak-go/goclient`;
+- (terminal) Run go client: `go run main.go`;
+- (browser) Navigate to http://localhost:8081 (where the goclient is running);
+
+  - (browser) Verify that you were redirected to KeyCloak login page;
+  - (browser) Set the credentials;
+  - (browser) Verify that you were redirected to a callback url that responds with an access token of "token_type" = "Bearer";
+
+</br>
+
+```
+{
+"AccessToken": {
+  "access_token": "access.token.here",
+  "token_type": "Bearer",
+  "refresh_token": "refresh.token.here",
+  "expiry": "2023-05-01T17:35:38.645105936-03:00"
+  }
+}
+```
+
+### Mapping user attributes
+
+https://plataforma.fullcycle.com.br/courses/242/168/108/conteudos?capitulo=108&conteudo=6436
+
+- (KeyCloak) Select "myuser" and create a new attribute named "languages" with value "typescript, javascript";
+- (KeyCloak) Select tab "Client Scopes" in main manu and create a client scope named "languages" with protocol OpenID Connect;
+  - (KeyCloak) Select "Mappers" tab and select "languages";
+  - (KeyCloak) Define "User Attribute", "Token Claim Name" as "languages"
+  - (KeyCloak) Define "Add to ID token", "Add to access token" and "Add to userinfo" as "On";
+- (KeyCloak) Select "myclient" under "clients" tab;
+  - (KeyCloak) Select tab "Client Scopes" and "Add Client Scope";
+  - (KeyCloak) Select "languages" scope and set as default;
+- (terminal) Navigate to "goclient": `cd modules/authentication-and-keycloak/keycloak-go/goclient`;
+- (terminal) Run goclient: `go run main.go`
+- (Browser) Navigate to http:localhost:8081 and type "myuser" credentials;
+- (Browser) Get the "id_token" from the response and decode it using https://jwt.io;
+- (Browser) Verify that the content of the token has "languages" attribute as defined for that user;
+- (KeyCloak) Go to "Client Scopes" and turn off "Add to access token";
+- (Browser) Verify that "languages now is not available in "access_token" but is still available in the "id_token";
+
+### Working with roles
+
+https://plataforma.fullcycle.com.br/courses/242/168/108/conteudos?capitulo=108&conteudo=6437
+
+- (KeyCloak) Acces "roles" tab;
+- (KeyCloak) Click "Create Role" and add "administrator" role; Do it again to create "billing" role;
+- (KeyCloak) In the lateral manu, select "Users";
+- (KeyCloak) Click "myuser" > "Role Mappings" and assign the "billing" role to the user;
+- (KeyCloak) In the lateral menu, select "Client Scopes" > "myclient" > "Scope" > "Assign Role" > select "billing" and click "assign";
+- (Go) Execute "goclient";
+- (Browser) Navigate to http://localhost:8081 > sign in > get access_token > decode it > verify that there is "roles" with "billing" in it;
+
 # References
 
 - RFC ft-ietf-oauth-v2: The OAuth 2.0 Authorization Framework. (2012, October 13). IETF Datatracker. Retrieved Retrieved May 1, 2023, from https://datatracker.ietf.org/doc/html/rfc6749
@@ -128,3 +198,7 @@ https://plataforma.fullcycle.com.br/courses/242/168/108/conteudos?capitulo=108&c
 
 - Citation Format: Journal of Information Technology
 - Tool used for generating citations: https://quillbot.com/
+
+```
+
+```
