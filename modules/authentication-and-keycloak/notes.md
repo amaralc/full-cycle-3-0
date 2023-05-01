@@ -170,6 +170,20 @@ https://plataforma.fullcycle.com.br/courses/242/168/108/conteudos?capitulo=108&c
 - (Browser) Navigate to http:localhost:8081 and type "myuser" credentials;
 - (Browser) Get the "id_token" from the response and decode it using https://jwt.io;
 - (Browser) Verify that the content of the token has "languages" attribute as defined for that user;
+- (KeyCloak) Go to "Client Scopes" and turn off "Add to access token";
+- (Browser) Verify that "languages now is not available in "access_token" but is still available in the "id_token";
+
+### Working with roles
+
+https://plataforma.fullcycle.com.br/courses/242/168/108/conteudos?capitulo=108&conteudo=6437
+
+- (KeyCloak) Acces "roles" tab;
+- (KeyCloak) Click "Create Role" and add "administrator" role; Do it again to create "billing" role;
+- (KeyCloak) In the lateral manu, select "Users";
+- (KeyCloak) Click "myuser" > "Role Mappings" and assign the "billing" role to the user;
+- (KeyCloak) In the lateral menu, select "Client Scopes" > "myclient" > "Scope" > "Assign Role" > select "billing" and click "assign";
+- (Go) Execute "goclient";
+- (Browser) Navigate to http://localhost:8081 > sign in > get access_token > decode it > verify that there is "roles" with "billing" in it;
 
 # References
 
