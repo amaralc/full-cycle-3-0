@@ -153,6 +153,24 @@ https://plataforma.fullcycle.com.br/courses/242/168/108/conteudos?capitulo=108&c
 }
 ```
 
+### Mapping user attributes
+
+https://plataforma.fullcycle.com.br/courses/242/168/108/conteudos?capitulo=108&conteudo=6436
+
+- (KeyCloak) Select "myuser" and create a new attribute named "languages" with value "typescript, javascript";
+- (KeyCloak) Select tab "Client Scopes" in main manu and create a client scope named "languages" with protocol OpenID Connect;
+  - (KeyCloak) Select "Mappers" tab and select "languages";
+  - (KeyCloak) Define "User Attribute", "Token Claim Name" as "languages"
+  - (KeyCloak) Define "Add to ID token", "Add to access token" and "Add to userinfo" as "On";
+- (KeyCloak) Select "myclient" under "clients" tab;
+  - (KeyCloak) Select tab "Client Scopes" and "Add Client Scope";
+  - (KeyCloak) Select "languages" scope and set as default;
+- (terminal) Navigate to "goclient": `cd modules/authentication-and-keycloak/keycloak-go/goclient`;
+- (terminal) Run goclient: `go run main.go`
+- (Browser) Navigate to http:localhost:8081 and type "myuser" credentials;
+- (Browser) Get the "id_token" from the response and decode it using https://jwt.io;
+- (Browser) Verify that the content of the token has "languages" attribute as defined for that user;
+
 # References
 
 - RFC ft-ietf-oauth-v2: The OAuth 2.0 Authorization Framework. (2012, October 13). IETF Datatracker. Retrieved Retrieved May 1, 2023, from https://datatracker.ietf.org/doc/html/rfc6749
