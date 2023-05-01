@@ -115,6 +115,8 @@ https://plataforma.fullcycle.com.br/courses/242/168/108/conteudos?capitulo=108&c
 
 ### Creating our first client
 
+https://plataforma.fullcycle.com.br/courses/242/168/108/conteudos?capitulo=108&conteudo=6433
+
 - (KeyCloak) Update the "myclient" created in the last class;
 
   - (KeyCloak) Set "Client Authentication" to "On" (http://localhost:8080/admin/master/console/#/myrealm/clients/1938d40f-103c-4555-980b-ccea1d1ef420/settings);
@@ -123,6 +125,33 @@ https://plataforma.fullcycle.com.br/courses/242/168/108/conteudos?capitulo=108&c
 
 - (Go) Create a client service in go;
   - (Go) Implementation is described [here](./keycloak-go/goclient/main.go)
+
+### Generating our first access token
+
+https://plataforma.fullcycle.com.br/courses/242/168/108/conteudos?capitulo=108&conteudo=6434
+
+- (KeyCloak) Log out "myuser" from the recently created sessions (http://localhost:8080/admin/master/console/#/myrealm/users/c57f8b76-79a7-4ef4-aded-b8afd5259b3f/sessions);
+- (GoClient) Handle callbacks and token exchange. Implementation described [here](./keycloak-go/goclient/main.go);
+- (terminal) Navigate to "goclient" folder: `cd modules/authentication-and-keycloak/keycloak-go/goclient`;
+- (terminal) Run go client: `go run main.go`;
+- (browser) Navigate to http://localhost:8081 (where the goclient is running);
+
+  - (browser) Verify that you were redirected to KeyCloak login page;
+  - (browser) Set the credentials;
+  - (browser) Verify that you were redirected to a callback url that responds with an access token of "token_type" = "Bearer";
+
+</br>
+
+```
+{
+"AccessToken": {
+  "access_token": "access.token.here",
+  "token_type": "Bearer",
+  "refresh_token": "refresh.token.here",
+  "expiry": "2023-05-01T17:35:38.645105936-03:00"
+  }
+}
+```
 
 # References
 
@@ -137,3 +166,7 @@ https://plataforma.fullcycle.com.br/courses/242/168/108/conteudos?capitulo=108&c
 
 - Citation Format: Journal of Information Technology
 - Tool used for generating citations: https://quillbot.com/
+
+```
+
+```
