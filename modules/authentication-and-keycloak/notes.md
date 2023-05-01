@@ -1,4 +1,4 @@
-# Introduction to OAuth and OpenID Connect
+# Authentication and KeyCloak
 
 ## Introduction to OAuth 2 and OpenID Connect
 
@@ -114,6 +114,15 @@ https://plataforma.fullcycle.com.br/courses/242/168/108/conteudos?capitulo=108&c
 - Follow steps described in keycloak getting started page: https://www.keycloak.org/getting-started/getting-started-docker
 
 ### Creating our first client
+
+- (KeyCloak) Update the "myclient" created in the last class;
+
+  - (KeyCloak) Set "Client Authentication" to "On" (http://localhost:8080/admin/master/console/#/myrealm/clients/1938d40f-103c-4555-980b-ccea1d1ef420/settings);
+  - (KeyCloak) Access "Credentials" tab (http://localhost:8080/admin/master/console/#/myrealm/clients/1938d40f-103c-4555-980b-ccea1d1ef420/credentials)
+  - (KeyCloak) Copy the client secret;
+
+- (Go) Create a client service in go;
+  - (Go) Implementation is described [here](./keycloak-go/goclient/main.go)
 
 # References
 
